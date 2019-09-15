@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+    <CheckBox
+        android:id="@+id/cbSTC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="STC - zniesienie udziału wsłasnego "/>
+
+    <CheckBox
+        android:id="@+id/cbTC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TC - obniżenie udziału własnego"/>
+
+    <CheckBox
+        android:id="@+id/cbCl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cleaning service"/>
+
+    <CheckBox
+        android:id="@+id/cbGps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nawigacja GPS"/>
+
+    <EditText
+        android:id="@+id/etExtrasValue"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Podaj wartość sprzedaży"/>
+
+</LinearLayout>
