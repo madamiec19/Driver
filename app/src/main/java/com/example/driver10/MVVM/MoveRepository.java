@@ -1,4 +1,4 @@
-package com.example.driver10;
+package com.example.driver10.MVVM;
 
 
 import android.app.Application;
@@ -14,6 +14,7 @@ public class MoveRepository {
     private MoveDao moveDao;
     private LiveData<List<Move>> allMoves;
     private LiveData<Double> valueSum;
+    private LiveData<Integer> rowCount;
 
 
     public MoveRepository(Application application) {
@@ -21,6 +22,8 @@ public class MoveRepository {
         moveDao = database.moveDao();
         allMoves = moveDao.getAllMoves();
         valueSum = moveDao.getValueSum();
+        rowCount = moveDao.getRowCount();
+
     }
 
     public void insert(Move move) {
@@ -45,6 +48,10 @@ public class MoveRepository {
 
     public LiveData<Double> getValueSum() {
         return valueSum;
+    }
+
+    public LiveData<Integer> getRowCount(){
+        return rowCount;
     }
 
 

@@ -4,125 +4,181 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WorkdayActivity">
+    tools:context=".Activities.WorkdayActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="40dp"
-            android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="0dp"
-                android:textColor="#000000"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
-                android:text="Ilość przepracowanych godzin"/>
-            <EditText
+                android:text="Dzień pracy" />
+
+            <TextView
+                android:id="@+id/tvDayDate"
                 android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:textColor="@color/colorAccent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:text="8"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
                 android:layout_weight="4"
-                android:text="Wartość przepracwanych godziń"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorAccent"
-                android:layout_weight="1"
-                android:textAlignment="viewEnd"
-                android:text="88 PLN"/>
+                android:inputType="none"
+                android:textAlignment="textEnd" />
         </LinearLayout>
+
         <LinearLayout
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="40dp"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="#000000"
                 android:layout_weight="10"
-                android:text="Ilość wykonanych ruchów"/>
-            <TextView
-                android:layout_width="0dp"
+                android:text="Godzina startu pracy" />
+
+            <EditText
+                android:id="@+id/etStartHour"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorAccent"
                 android:layout_weight="1"
-                android:textAlignment="viewEnd"
-                android:text="10"/>
+                android:inputType="datetime"
+                android:textAlignment="center" />
         </LinearLayout>
+
         <LinearLayout
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="40dp"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="0dp"
-                android:textColor="#000000"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="Ilość przepracowanych godzin" />
+
+            <EditText
+                android:id="@+id/etHours"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Wartość ruchów"/>
-            <TextView
-                android:textColor="@color/colorAccent"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAlignment="viewEnd"
-                android:text="70 PLN"/>
+                android:inputType="numberDecimal"
+                android:textAlignment="center" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:text="Wartość przepracowanych godzin" />
+
+            <TextView
+                android:id="@+id/tvHoursValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0 PLN"
+                android:textAlignment="viewEnd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="Ilość wykonanych ruchów" />
+
+            <TextView
+                android:id="@+id/tvMovesCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="10"
+                android:textAlignment="viewEnd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Wartość ruchów" />
+
+            <TextView
+                android:id="@+id/tvMovesValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="70 PLN"
+                android:textAlignment="viewEnd" />
+        </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
             android:text="SUMA"
             android:textAlignment="center"
-            android:textSize="32sp"
-            android:layout_marginTop="25dp"
-            android:textColor="@color/colorAccent"/>
+            android:textSize="32sp" />
+
         <TextView
+            android:id="@+id/tvSum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="158 PLN"
-            android:textColor="#32CD32"
-            android:textStyle="bold"
-            android:textSize="36dp"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="36sp"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
-    <TextView
+
+    <Button
+        android:id="@+id/btnEndDay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="ZAKOŃCZ DZIEŃ"
-        android:textAlignment="center"
         android:padding="14dp"
+        android:text="zakończ dzień"
+        android:textAlignment="center"
         android:textSize="24sp"
-        android:background="@color/colorAccent"
-        android:textColor="#ffffff"
-        android:textStyle="bold"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,24 +7,22 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.driver10.R;
 
-public class ExtrasDialog extends AppCompatDialogFragment {
-    private EditText etExtrasValue;
-    private CheckBox cbSTC, cbTC, cbCl, cbGps;
-    private ExtrasDialogListener listener;
+public class CostsDialog extends AppCompatDialogFragment {
+    private EditText etCosts;
+    private CostsDialogListener listener;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.layour_extras_dialog, null);
+        View view = inflater.inflate(R.layout.layout_costs_dialog, null);
 
         builder.setView(view)
                 .setNegativeButton("anuluj", new DialogInterface.OnClickListener() {
@@ -36,24 +34,11 @@ public class ExtrasDialog extends AppCompatDialogFragment {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String extras="";
-                        int extrasValue;
-
-                        if(cbSTC.isChecked()) extras +=  "STC ";
-                        if(cbTC.isChecked()) extras += "TC ";
-                        if(cbCl.isChecked()) extras +=  "Cleaning Service ";
-                        if(cbGps.isChecked()) extras += "GPS ";
-
-                        extrasValue = Integer.parseInt(etExtrasValue.getText().toString());
-
-                        listener.applyExtras(extras, extrasValue);
+                        double comment = Double.parseDouble(etCosts.getText().toString());
+                        listener.applyCosts(comment);
                     }
                 });
-        cbSTC = view.findViewById(R.id.cbSTC);
-        cbTC = view.findViewById(R.id.cbTC);
-        cbCl = view.findViewById(R.id.cbCl);
-        cbGps = view.findViewById(R.id.cbGps);
-        etExtrasValue = view.findViewById(R.id.etExtrasValue);
+        etCosts = view.findViewById(R.id.etCosts);
         return builder.create();
     }
 
@@ -62,15 +47,13 @@ public class ExtrasDialog extends AppCompatDialogFragment {
         super.onAttach(context);
 
         try {
-            listener = (ExtrasDialogListener) context;
+            listener = (CostsDialogListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() +
-                    "must implement ExtrasDialogListener");
+                    "must implement CommentDialogListener");
         }
     }
 
-    public interface ExtrasDialogListener{
-        void applyExtras(String extras, int extrasValue);
-    }
-}
-
+    public interface CostsDialogListener{
+        void applyCosts(double mCosts);
+    }}

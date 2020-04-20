@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.LoginActivity"
-    android:id="@+id/mainlayout">
+    android:id="@+id/mainlayout"
+    android:background="@color/darkGray"> <!--todo! KOLOR TŁA HERE -->
 
 
     <LinearLayout
@@ -21,20 +22,27 @@
             android:orientation="vertical"
             android:layout_marginBottom="150dp">
 
-            <ImageView
+            <TextView
                 android:layout_width="165dp"
                 android:layout_height="75dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="100dp"
-                android:src="@drawable/applogo"/>
+                android:text="DRIVER"
+                android:textColor="#ffffff"
+                android:textSize="48sp"
+                android:textStyle="bold"/>
             <EditText
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
+                android:textColor="#ffffff"
                 android:inputType="textEmailAddress"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
+                android:backgroundTint="#ffffff"
+
+                android:textColorHint="#ffffff"
                 android:hint="email"/>
             <EditText
                 android:id="@+id/etPassword"
@@ -44,6 +52,8 @@
                 android:inputType="textPassword"
                 android:textSize="18sp"
                 android:layout_marginEnd="24dp"
+                android:backgroundTint="#ffffff"
+                android:textColorHint="#ffffff"
                 android:hint="hasło"/>
             <TextView
                 android:layout_width="match_parent"
@@ -62,14 +72,16 @@
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:layout_margin="0dp"
+        android:background="@color/colorPrimary"
         android:fitsSystemWindows="true"
-        android:text="ZALOGUJ"
-        android:textSize="24dp"
-        android:textStyle="bold"
-        android:textColor="#ffffff"
-        android:textAlignment="center"
         android:padding="12dp"
+        android:text="ZALOGUJ"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/mainlayout"
-        android:layout_margin="0dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

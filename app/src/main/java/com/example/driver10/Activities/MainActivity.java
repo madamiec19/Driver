@@ -6,11 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ClipData;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,20 +17,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.driver10.GsheetAPI;
-import com.example.driver10.Move;
-import com.example.driver10.MoveAdapter;
-import com.example.driver10.MoveViewModel;
+import com.example.driver10.MVVM.Move;
+import com.example.driver10.RecyclerView.MoveAdapter;
+import com.example.driver10.MVVM.MoveViewModel;
 import com.example.driver10.R;
-import com.example.driver10.RecyclerItemClickListener;
-import com.example.driver10.SwipeToDeleteCallback;
-import com.example.driver10.WorkdayActivity;
+import com.example.driver10.RecyclerView.RecyclerItemClickListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -46,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     TextView tvMoneyToday;
     ImageView btnWorkday;
     RecyclerView recyclerView;
+    FloatingActionButton floatingActionButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,38 +62,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        setFloatingButton();
+        floatingActionButton = findViewById(R.id.floatingAddMove);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AddMoveActivity1.class);
+                startActivityForResult(intent, 0);
+            }
+        });
+
+
         mAuth = FirebaseAuth.getInstance();
 
         //setting recyclerview with list of moves
-        setUpRecyclerView();
-
-
-
-
-
-    }
-
-
-    private void setUpRecyclerView(){
-
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(moveAdapter));
-//        itemTouchHelper.attachToRecyclerView(recyclerView);
         final MoveAdapter moveAdapter = new MoveAdapter();
         recyclerView.setAdapter(moveAdapter);
 
-        moveViewModel = new ViewModelProvider(this).get(MoveViewModel.class);//ViewModelProviders.of(this).get(MoveViewModel.class);
+        moveViewModel = new ViewModelProvider(this).get(MoveViewModel.class);
         moveViewModel.getAllMoves().observe(this, new Observer<List<Move>>() {
             @Override
             public void onChanged(List<Move> moves) {
                 moveAdapter.setMoves(moves);
             }
         });
-
+        ////////////////////////
 
         //gettin sum of move's values
         moveViewModel.getValueSum().observe(this, new Observer<Double>() {
@@ -114,10 +108,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        // onclick dla poszczególnych ruchów
         recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
+
                     @Override public void onItemClick(View view, int position) {
-                        Toast.makeText(MainActivity.this, moveAdapter.getMoveAt(position).getRoute()+" /  " +moveAdapter.getMoveAt(position).getMoveTypesString(), Toast.LENGTH_LONG).show();
+                        //TODO! po kliknieciu otwiera sie dialog informacyjny
+                        Toast.makeText(MainActivity.this,
+                                moveAdapter.getMoveAt(position).getDate()+ " godzina: " + moveAdapter.getMoveAt(position).getHour() +
+                                        "\ntrasa: " + moveAdapter.getMoveAt(position).getCosts(),
+                                Toast.LENGTH_LONG)
+                                .show();
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
@@ -142,8 +144,9 @@ public class MainActivity extends AppCompatActivity {
                 })
         );
 
-    }
 
+
+    }
 
     @Override
     public void onStart(){
@@ -163,31 +166,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setFloatingButton() {
-        FloatingActionButton btnAddMove = findViewById(R.id.floatingAddMove);
-        btnAddMove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddMoveActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
 
+    //Menu rozwijane w głównej aktywności, prawy górny róg
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.move_menu, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.delete_all_moves:
-                moveViewModel.deleteAllMoves();
-                Toast.makeText(this, "Wszystkie ruchy usunięte", Toast.LENGTH_SHORT).show();
-                return super.onOptionsItemSelected(item);
             case R.id.showEveryMove:
                 Intent everyMovesSheet = new Intent(Intent.ACTION_VIEW, Uri.parse(GsheetAPI.MOVESSHEET));
                 startActivity(everyMovesSheet);
@@ -203,6 +192,23 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+    }
+
+
+    //reakcja na result od innej aktywnosci
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+            if (resultCode == Activity.RESULT_OK) {
+                String result = data.getStringExtra("result");
+                Toast.makeText(this, "Dodano ruch!" + result, Toast.LENGTH_SHORT).show();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.driver10;
+package com.example.driver10.MVVM;
 
 import android.app.Application;
 
@@ -12,12 +12,14 @@ public class MoveViewModel extends AndroidViewModel {
     private MoveRepository repository;
     private LiveData<List<Move>> allMoves;
     private LiveData<Double> valueSum;
+    private LiveData<Integer> rowCount;
 
     public MoveViewModel(@NonNull Application application) {
         super(application);
         repository = new MoveRepository(application);
         allMoves = repository.getAllMoves();
         valueSum = repository.getValueSum();
+        rowCount = repository.getRowCount();
     }
 
     public void insert(Move move){
@@ -41,4 +43,6 @@ public class MoveViewModel extends AndroidViewModel {
     }
 
     public LiveData<Double> getValueSum() {return valueSum;}
+
+    public LiveData<Integer> getRowCount() {return rowCount;}
 }

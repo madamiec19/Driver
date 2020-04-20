@@ -1,4 +1,4 @@
-package com.example.driver10;
+package com.example.driver10.MVVM;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

@@ -1,4 +1,4 @@
-package com.example.driver10;
+package com.example.driver10.RecyclerView;
 
 
 import android.view.LayoutInflater;
@@ -9,7 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.driver10.Activities.MainActivity;
+import com.example.driver10.MVVM.Move;
+import com.example.driver10.R;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.math.BigDecimal;
@@ -36,7 +37,7 @@ public class MoveAdapter extends RecyclerView.Adapter<MoveAdapter.MoveHolder> {
         holder.tvCar.setText(currentMove.getCar());
         holder.tvKmStart.setText(String.valueOf(currentMove.getKmStart()));
         holder.tvKmStop.setText(String.valueOf(currentMove.getKmStop()));
-
+        holder.tvType.setText(String.valueOf(currentMove.getMoveTypesString()));
         //
         BigDecimal tempBig = new BigDecimal(Double.toString(currentMove.getValue()));
         tempBig = tempBig.setScale(2, BigDecimal.ROUND_HALF_EVEN);
@@ -95,11 +96,12 @@ public class MoveAdapter extends RecyclerView.Adapter<MoveAdapter.MoveHolder> {
         private TextView tvKmStart;
         private TextView tvKmStop;
         private TextView tvValue;
+        private TextView tvType;
 
 
         public MoveHolder(View itemView){
             super(itemView);
-
+            tvType = itemView.findViewById(R.id.tvType);
             tvCar = itemView.findViewById(R.id.tvCar);
             tvKmStart = itemView.findViewById(R.id.tvKmStart);
             tvKmStop = itemView.findViewById(R.id.tvKmStop);

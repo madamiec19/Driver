@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.driver10">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,11 +13,13 @@
         android:roundIcon="@drawable/logo2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WorkdayActivity"></activity>
+        <activity android:name=".Activities.AddMoveActivity3" />
+        <activity android:name=".Activities.AddMoveActivity2" />
+        <activity android:name=".Activities.AddMoveActivity1" />
+        <activity android:name=".Activities.WorkdayActivity" />
         <activity
             android:name=".Activities.LoginActivity"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".Activities.AddMoveActivity" />
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +28,5 @@
             </intent-filter>
         </activity>
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
